@@ -1,0 +1,79 @@
+<div class="container px-5 px-sm-0 mt-5">
+    <div class="row">
+       <div class="col-8">
+       </div>
+         <div class="col-12">
+           <div class="row">
+            <div class="col-12 text-center">
+              <p>タイトル：<%= @book.title %></p>
+              <p>感想：<%= @book.body %></p>
+              <p>ユーザーネーム：<%= @book.user.name %></p>
+              <p>投稿日：<%= @book.created_at.strftime('%Y/%m/%d') %></p>
+
+              <% if @book.user == current_user %>
+                <%= link_to "削除", public_book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか?" %>
+              <% end %>
+           </div>
+          </div>
+         </div>
+
+        <!--いいね機能-->
+        <% if user_signed_in? %>
+         <div class="col-12">
+           <div class="row">
+            <div class="col-12 text-center">
+            <% if @book.favorited_by?(current_user) %>
+            <p>
+              <%= link_to public_book_favorites_path(@book), method: :delete do %>
+               ♥<%= @book.favorites.count %> いいね
+              <% end %>
+           </p>
+           <% else %>
+           <p>
+             <%= link_to public_book_favorites_path(@book), method: :post do %>
+              ♡<%= @book.favorites.count %> いいね
+             <% end %>
+           </p>
+           <% end %>
+           </div>
+          </div>
+         </div>
+        <% end %>
+
+
+        <!--コメント機能-->
+         <div class="col-12">
+           <div class="row">
+            <div class="col-12 text-center">
+            <p>コメント件数：<%= @book.comments.count %></p>
+
+            <% @book.comments.each do |comment| %>
+            <p>ユーザーネーム：<%= comment.user.name %></p>
+            <p>
+              コメント：<%= comment.comment %>
+              (<%= comment.created_at.strftime('%Y/%m/%d') %>)
+            </p>
+
+            <% if comment.user == current_user %>
+             <%= link_to "削除", public_book_comment_path(comment.book, comment), method: :delete %>
+            <% end %>
+            <% end %>
+          </div>
+         </div>
+        </div>
+
+        <% if user_signed_in? %>
+        <div class="col-12">
+          <div class="row">
+            <div class="col-12 text-center">
+             <%= form_with model: [@book, @comment], url: public_book_comments_path(@book) do |f| %>
+              <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+              <%= f.submit "送信する" %>
+            <% end %>
+           </div>
+         </div>
+        </div>
+        <% end %>
+     </div>
+    </div>
+  </div>

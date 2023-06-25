@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+      <h2 class="text-dark bg-light p-4 mb-0">会員情報編集</h2>
+      <%= form_with model: @user, url: public_users_information_path, local: true do |f| %>
+        <div class="input-group mb-3 mt-4">
+          <table class="table table-bordered">
+            <div class="row g-3 align-items-center mb-2 ml-3">
+              <label for="inputPassword6" class="col-form-label">名前</label>
+            </div>
+            <div class="col-auto">
+              <%= f.text_field :name %>
+            </div>
+
+            <div class="row g-3 align-items-center mb-2 ml-3">
+              <div class="input-group-prepend">
+                <label for="inputPassword6" class="col-form-label">メールアドレス</label>
+              </div>
+              <div class="col-auto">
+                <%= f.text_field :email %>
+              </div>
+            </div>
+          </table>
+        </div>
+
+         <div class="mt-4 ml-5">
+            <%= f.submit "編集内容を保存", class:"btn btn-success" %>
+            <%= link_to "退会する", public_users_unsubscribe_path, class:"btn btn-danger" %>
+         </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<h4>新規会員登録</h4>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "public/shared/error_messages", resource: resource %>
+
+<table class="table table-borderless">
+       <tbody>
+        <tr>
+         <div class="field">
+          <th scope="col">名前</th>
+          <td>
+           <%= f.text_field :name, autofocus: true, class: "name" %>
+          </td>
+         </tr>
+
+        <tr>
+         <div class="field">
+          <th scope="col">メールアドレス</th>
+          <td colspan="3">
+            <%= f.email_field :email, size: 78, autofocus: true, autocomplete: "email" %>
+          </td>
+         </div>
+        </tr>
+        <tr>
+         <div class="field">
+          <th scope="col">パスワード(6文字以上)</th>
+          <td>
+            <% if @minimum_password_length %>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "new-password" %>
+          </td>
+         </div>
+        </tr>
+
+        <tr>
+         <div class="field">
+          <th scope="col">パスワード(確認用)</th>
+          <td>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          </td>
+         </div>
+       </tr>
+
+       <tr>
+        <td></td>
+        <td>
+          <div class="actions">
+            <%= f.submit "新規登録", class: "btn btn-success" %>
+          </div>
+        </td>
+       </tr>
+      </tbody>
+     </table>
+    <% end %>
+
+     <h4>既に登録済みの方</h4>
+     <p class="login-link-text"><%= link_to "こちら", new_user_session_path,class: "kotira" %>からログインしてください。</p>
+    </div>
+  </div>
+</div>

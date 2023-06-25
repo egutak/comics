@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+      <h4 class="text-dark bg-light p-4 mb-0">マイページ</h4>
+        <div class="form-body p-4">
+          <h4>
+            登録情報
+            <%= link_to "編集する",public_users_information_edit_path, class:"btn btn-success ml-3" %>
+          </h4>
+        </div>
+        <table class="table table-bordered">
+          <tr>
+            <td scope="col" class="bg-light">氏名</td>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td scope="col" class="bg-light">メールアドレス</td>
+            <td><%= @user.email %></td>
+          </tr>
+        </table>
+
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col" class="bg-light">投稿一覧</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @user.books.each do |book| %>
+            <tr>
+              <td>タイトル</td>
+              <td><%= link_to book.title, public_book_path(book) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+       </table>
+
+       <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col" class="bg-light">いいね一覧</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @favorites.each do |favorite| %>
+            <tr>
+              <td>タイトル</td>
+              <td><%= link_to favorite.book.title, public_book_path(favorite.book) %></td>
+            </tr>
+            <% end %>
+          </tbody>
+       </table>
+    </div>
+  </div>
+</div>
