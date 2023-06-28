@@ -86,6 +86,9 @@
                 <% end %>
               </div>
             </div>
+            <% Tag.all.each do |t| %>
+                  <p><%= check_box :tag_ids, t.name %><%= t.name %></p>
+                <% end %>
           <% end %>
         </div>
       </div>

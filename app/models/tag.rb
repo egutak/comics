@@ -1,5 +1,4 @@
 class Tag < ApplicationRecord
   has_many :book_tag_relations, dependent: :destroy
-  #Tagsテーブルから中間テーブルを介してArticleテーブルへの関連付け
-  has_many :books, through: :tweet_tag_relations, dependent: :destroy
+  has_many :books, through: :book_tag_relations, dependent: :destroy
 end

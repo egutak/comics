@@ -23,6 +23,18 @@
           </div>
           <%= f.text_area :body, class:"form-control", rows:"3", placeholder:"コメントをここに" %>
           <hr>
+
+          <div class='form-group'>
+            <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+             <div class='form-check'>
+                <%= tag.label class: 'form-check-label' do %>
+                    <%= tag.check_box class: 'form-check-input' %>
+                    <%= tag.text %>
+                <% end %>
+             </div>
+            <% end %>
+          </div>
+
           <%= f.submit '投稿', class:"btn btn-lg btn-block btn-primary mt-4" %>
         <% end %>
       </div>

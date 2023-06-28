@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_06_24_121255) do
+ActiveRecord::Schema.define(version: 2023_06_27_122529) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 2023_06_24_121255) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "book_tag_relations", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["book_id"], name: "index_book_tag_relations_on_book_id"
+    t.index ["tag_id"], name: "index_book_tag_relations_on_tag_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -47,9 +56,8 @@ ActiveRecord::Schema.define(version: 2023_06_24_121255) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "public_favorites", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "book_id"
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -68,4 +76,6 @@ ActiveRecord::Schema.define(version: 2023_06_24_121255) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "book_tag_relations", "books"
+  add_foreign_key "book_tag_relations", "tags"
 end

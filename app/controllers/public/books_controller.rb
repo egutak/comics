@@ -49,7 +49,7 @@ class Public::BooksController < ApplicationController
   private
 
   def book_params
-   params.require(:book).permit(:title,:body)
+   params.require(:book).permit(:title,:body, tag_ids: [])
   end
 
   def ensure_correct_user
